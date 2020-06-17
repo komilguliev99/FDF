@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcapers <dcapers@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dcapers <dcapers@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 23:15:38 by kolya             #+#    #+#             */
-/*   Updated: 2020/03/14 14:51:53 by dcapers          ###   ########.fr       */
+/*   Updated: 2020/06/16 02:45:03 by dcapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ long long int		ft_pow(long long int nbr, int p);
 char				*ft_ctos(char c);
 void				ft_putchar_cnt(char c, int count);
 int					get_next_line(const int fd, char **line);
+int					ft_wordcount(char const *s, char c);
 
 #endif

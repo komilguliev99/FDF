@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcapers <dcapers@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dcapers <dcapers@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 15:34:56 by dcapers           #+#    #+#             */
-/*   Updated: 2020/03/13 17:48:44 by dcapers          ###   ########.fr       */
+/*   Updated: 2020/06/16 02:44:45 by dcapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-static int		ft_wordcount(char const *s, char c)
+int				ft_wordcount(char const *s, char c)
 {
 	size_t	i;
 	int		count;

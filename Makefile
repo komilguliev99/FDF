@@ -3,29 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pelease <pelease@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: dcapers <dcapers@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/21 11:31:41 by dcapers           #+#    #+#              #
-#    Updated: 2020/06/14 22:42:36 by pelease          ###   ########.fr        #
+#    Updated: 2020/06/16 04:29:08 by dcapers          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-LIST	=	 
+LIST	=	 main.c read_map.c utils.c draw_map.c
 DIRS	=	src/
 SOURCE	=	$(addprefix $(DIRS), $(LIST))
 OBJ		=	$(patsubst %.c,%.o,$(SOURCE))
 
-LIB		= libft/libft.a
 LDIRS	= libft/ 
+LIBS	= libft/libft.a
 
 LIB_ALL		= $(addsuffix .all,$(LDIRS))
 LIB_CLEAN	= $(addsuffix .clean,$(LDIRS))
 LIB_FCLEAN	= $(addsuffix .fclean,$(LDIRS))
 
 INCS		= includes/
-INCS_LIBFT	= $(addsuffix includes/,$(LDIRS))
+INCS_LIBFT	= libft/includes
+INCS_MLX	= minilibx/
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -40,10 +41,10 @@ fclean: $(LIB_FCLEAN) clean
 re:		fclean all
 
 %.o: %.c
-	gcc $(FLAGS) -c $< -o $@ -I $(INCS_LIBFT) -I $(INCS) -MD
+	gcc $(FLAGS) -c $< -o $@  -I $(INCS) -I $(INCS_LIBFT) -I $(INCS_MLX) -MD
 
-$(NAME): $(OBJ) $(LIB)
-	gcc $(FLAGS) $(OBJ) -o $(basename $(NAME)) $(LIB)
+$(NAME): $(OBJ) $(LIBS)
+	gcc $(FLAGS) $(OBJ) -o $(basename $(NAME)) -L $(LDIRS) -lft -L minilibx -lmlx_Linux -lXext -lX11 -lm
 
 %.all:
 	make -C $*
