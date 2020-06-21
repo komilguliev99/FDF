@@ -16,6 +16,9 @@ all	: do_configure
 do_configure	:
 	./configure
 
+fclean:
+	rm -rf libmlx_Linux.a libmlx.a
+
 clean	:
 	./configure clean
 

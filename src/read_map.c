@@ -6,13 +6,13 @@
 /*   By: dcapers <dcapers@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 02:39:23 by dcapers           #+#    #+#             */
-/*   Updated: 2020/06/17 02:56:28 by dcapers          ###   ########.fr       */
+/*   Updated: 2020/06/21 01:14:48 by dcapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void			set_sizes(t_fdf *st, char *file_name)
+static void			set_sizes(t_fdf *st, char *file_name)
 {
 	int			process_id;
 	char		*line;
@@ -30,7 +30,7 @@ void			set_sizes(t_fdf *st, char *file_name)
 	close(process_id);
 }
 
-void			init_map(char *file_name, t_fdf *st)
+static void			init_map(char *file_name, t_fdf *st)
 {
 	int		i;
 
@@ -40,10 +40,20 @@ void			init_map(char *file_name, t_fdf *st)
 	i = 0;
 	while (i < st->height)
 		if (!(st->map[i++] = (t_point *)malloc(sizeof(t_point) * st->width)))
-			force_exit("allocating of (int) sector!");	
+			force_exit("allocating of (int) sector!");
 }
 
-void			read_map(char *file_name, t_fdf *st)
+static void			set_map_cords(t_fdf *st, char *line, int i, int j)
+{
+	st->map[i][j].z = ft_atoi(line);
+	st->map[i][j].x = j;
+	st->map[i][j].y = i;
+	st->map[i][j].has_z = st->map[i][j].z != 0;
+	if (st->map[i][j].z > st->max_z)
+		st->max_z = st->map[i][j].z;
+}
+
+void				read_map(char *file_name, t_fdf *st)
 {
 	int		i;
 	int		j;
@@ -61,9 +71,7 @@ void			read_map(char *file_name, t_fdf *st)
 		start = line;
 		while (j < st->width)
 		{
-			st->map[i][j].z = ft_atoi(line);
-			st->map[i][j].x = j * st->zoom;
-			st->map[i][j].y = i * st->zoom;
+			set_map_cords(st, line, i, j);
 			strup_to(&line, ' ');
 			j++;
 		}
